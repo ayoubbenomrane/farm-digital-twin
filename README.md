@@ -1,4 +1,5 @@
 # 🌾 Farm Digital Twin
+![screenshot](screenshot.png)
 
 A digital twin system that simulates a farm divided into squares (A1, A2, B1...) where each square holds its own dynamic data such as soil moisture, temperature, and crop type. This twin provides a real-time representation of a physical farm using MQTT and REST APIs.
 
