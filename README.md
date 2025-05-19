@@ -47,7 +47,7 @@ Example:
     "crop": "wheat"
   }
 }
-
+```
 ---
 
 ## 🚀 How It Works
