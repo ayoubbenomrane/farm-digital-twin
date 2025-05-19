@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  mongo-db:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+
+  orion:
+    image: fiware/orion
+    depends_on:
+      - mongo-db
+    ports:
+      - "1026:1026"
+    command: -dbhost mongo-db -logLevel DEBUG
+
+  fastapi-backend:
+    build: ./fastapi-app
+    depends_on:
+      - orion
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fastapi-app:/app
+    working_dir: /app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload

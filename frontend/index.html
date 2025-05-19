@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Farm Digital Twin</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>Farm Parcels Overview</h1>
+  <div id="output"></div>
+
+  <script>
+    async function loadData() {
+      const res = await fetch("http://localhost:8000/parcels");
+      const data = await res.json();
+
+      document.getElementById("output").innerHTML = data.map(parcel => `
+        <h2>${parcel.id}</h2>
+        <ul>
+          <li><strong>Humidity:</strong> ${parcel.humidity.value}</li>
+          <li><strong>pH:</strong> ${parcel.pH.value}</li>
+          <li><strong>Crop Type:</strong> ${parcel.cropType.value}</li>
+          <li><strong>Growth:</strong> ${parcel.plantGrowth.value}%</li>
+        </ul>
+      `).join('');
+    }
+
+    setInterval(loadData, 5000); // refresh every 5s for demo
+    loadData();
+  </script>
+</body>
+</html>
